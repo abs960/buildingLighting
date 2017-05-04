@@ -39,7 +39,9 @@ file(GLOB SOURCE_FILES
         *.cpp
         *.c
         *.hpp
-        *.h)
+        *.h
+        SOIL2/*.c
+        SOIL2/*.h)
 
 add_executable(buildingLighting ${SOURCE_FILES})
 
