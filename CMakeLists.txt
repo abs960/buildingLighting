@@ -3,5 +3,60 @@ project(buildingLighting)
 
 set(CMAKE_CXX_STANDARD 14)
 
-set(SOURCE_FILES main.cpp)
+# Including directories
+
+# OpenGL search
+find_package(OpenGL REQUIRED)
+if (OPENGL_FOUND)
+    include_directories(${OPENGL_INCLUDE_DIR})
+endif(OPENGL_FOUND)
+
+# GLEW seacrh
+find_package(glew REQUIRED)
+if (GLEW_FOUND)
+    include_directories(${GLEW_INCLUDE_DIRS})
+endif(GLEW_FOUND)
+
+# GLFW search
+include(FindGLFW.txt)
+if (GLFW_FOUND)
+    include_directories(${GLFW_INCLUDE_DIR})
+endif(GLFW_FOUND)
+
+# GLM search
+include(FindGLM.txt)
+if (GLM_FOUND)
+    include_directories(${GLM_INCLUDE_DIRS})
+endif(GLM_FOUND)
+
+# Assimp search
+include(FindAssimp.txt)
+if (ASSIMP_FOUND)
+    include_directories(${ASSIMP_INCLUDE_DIRS})
+endif(ASSIMP_FOUND)
+
+file(GLOB SOURCE_FILES
+        *.cpp
+        *.c
+        *.hpp
+        *.h)
+
 add_executable(buildingLighting ${SOURCE_FILES})
+
+# Linking libraries
+
+if (OPENGL_FOUND)
+    target_link_libraries(buildingLighting ${OPENGL_gl_LIBRARY})
+endif(OPENGL_FOUND)
+
+if (GLEW_FOUND)
+    target_link_libraries(buildingLighting ${GLEW_LIBRARIES})
+endif(GLEW_FOUND)
+
+if (GLFW_FOUND)
+    target_link_libraries(buildingLighting ${GLFW_LIBRARIES})
+endif(GLFW_FOUND)
+
+if (ASSIMP_FOUND)
+    target_link_libraries(buildingLighting ${ASSIMP_LIBRARIES})
+endif(ASSIMP_FOUND)
