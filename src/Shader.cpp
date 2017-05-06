@@ -1,4 +1,4 @@
-#pragma once
+#include "Shader.h"
 
 GLuint Shader::createShader(GLenum shaderType, const GLchar* shaderCode) {
     // infoLog is used to show text of error
