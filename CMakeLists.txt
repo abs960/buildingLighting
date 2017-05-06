@@ -36,10 +36,10 @@ if (ASSIMP_FOUND)
 endif(ASSIMP_FOUND)
 
 file(GLOB SOURCE_FILES
-        *.cpp
-        *.c
-        *.hpp
-        *.h
+        src/*.cpp
+        src/*.c
+        src/*.hpp
+        src/*.h
         SOIL2/*.c
         SOIL2/*.h)
 
