@@ -11,7 +11,7 @@ class Shader {
 private:
 	
 	GLuint program;
-	
+
 	GLuint createShader(GLenum shaderType, const GLchar* shaderCode) {
 		// infoLog is used to show text of error
 		GLchar infoLog[512];
@@ -25,10 +25,27 @@ private:
 		glGetShaderiv(result, GL_COMPILE_STATUS, &success);
 		if (!success) {
 			glGetShaderInfoLog(result, 512, NULL, infoLog);
-			std::cout << shaderType << "ERROR::SHADER::COMPILATION_FAILED\n" << infoLog << std::endl;
+			std::cout << "ERROR::SHADER::" << getShaderTypeName(shaderType) << "COMPILATION_FAILED" << std::endl
+					  << infoLog << std::endl;
 		}
 		
 		return result;
+	}
+
+	std::string getShaderTypeName(GLenum shaderType) {
+		std::string name;
+
+		switch (shaderType) {
+			case GL_COMPUTE_SHADER: name = "COMPUTE"; break;
+			case GL_VERTEX_SHADER: name = "VERTEX"; break;
+			case GL_TESS_CONTROL_SHADER: name = "TESS_CONTROL"; break;
+			case GL_TESS_EVALUATION_SHADER: name = "TESS_EVALUATION"; break;
+			case GL_GEOMETRY_SHADER: name = "GEOMETRY"; break;
+			case GL_FRAGMENT_SHADER: name = "FRAGMENT"; break;
+			default: name = "OTHER"; break;
+		}
+
+		return name;
 	}
 	
 public:
@@ -53,7 +70,7 @@ public:
 			vertexCode = vShaderStream.str();
 			fragmentCode = fShaderStream.str();
 		} catch (std::ifstream::failure e) {
-			std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ" << std::endl;
+			std::cout << "ERROR::SHADER::FILE_NOT_SUCCESSFULLY_READ" << std::endl;
 		}
 		
 		const GLchar *vShaderCode = vertexCode.c_str();
@@ -75,10 +92,10 @@ public:
 			std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
 		}
 		
-		// Delete the shaders as they're linked into program now and are no longer necessery
+		// Delete the shaders as they're linked into program now and are no longer necessary
 		glDeleteShader(vertex);
 		glDeleteShader(fragment);
-		// Close the file streams
+
 		vShaderFile.close();
 		fShaderFile.close();
 	}
