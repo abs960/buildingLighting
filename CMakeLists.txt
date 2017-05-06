@@ -18,19 +18,19 @@ if (GLEW_FOUND)
 endif(GLEW_FOUND)
 
 # GLFW search
-include(FindGLFW.txt)
+include(CMake/FindGLFW.txt)
 if (GLFW_FOUND)
     include_directories(${GLFW_INCLUDE_DIR})
 endif(GLFW_FOUND)
 
 # GLM search
-include(FindGLM.txt)
+include(CMake/FindGLM.txt)
 if (GLM_FOUND)
     include_directories(${GLM_INCLUDE_DIRS})
 endif(GLM_FOUND)
 
 # Assimp search
-include(FindAssimp.txt)
+include(CMake/FindAssimp.txt)
 if (ASSIMP_FOUND)
     include_directories(${ASSIMP_INCLUDE_DIRS})
 endif(ASSIMP_FOUND)
