@@ -35,7 +35,7 @@ if (ASSIMP_FOUND)
     include_directories(${ASSIMP_INCLUDE_DIRS})
 endif(ASSIMP_FOUND)
 
-file(GLOB SOURCE_FILES
+file(GLOB_RECURSE SOURCE_FILES
         src/*.cpp
         src/*.c
         src/*.hpp
@@ -43,7 +43,11 @@ file(GLOB SOURCE_FILES
         SOIL2/*.c
         SOIL2/*.h)
 
-add_executable(buildingLighting ${SOURCE_FILES})
+file(GLOB_RECURSE SHADER_FILES
+        resources/shaders/*.frag
+        resources/shaders/*.vert)
+
+add_executable(buildingLighting ${SOURCE_FILES} ${SHADER_FILES})
 
 # Linking libraries
 
