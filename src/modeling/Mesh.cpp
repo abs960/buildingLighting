@@ -20,9 +20,9 @@ void Mesh::Draw(Shader shader) {
 		std::string number;
 		std::string name = this->textures[i].getType();
 
-		if (name == "texture_diffuse") {
+		if (name == std::string(connectField(MATERIAL, DIFFUSE))) {
 			ss << diffuseNr++;
-		} else if (name == "texture_specular") {
+		} else if (name == std::string(connectField(MATERIAL, SPECULAR))) {
 			ss << specularNr++;
 		}
 
@@ -33,8 +33,9 @@ void Mesh::Draw(Shader shader) {
 		glBindTexture(GL_TEXTURE_2D, this->textures[i].getId());
 	}
 
-	// Also set each mesh's shininess property to a default value (if you want you could extend this to another mesh property and possibly change this value)
-	glUniform1f(glGetUniformLocation(shader.getProgram(), "material.shininess"), 16.0f);
+	// Also set each mesh's shininess property to a default value (if you want you could extend this to
+	// another mesh property and possibly change this value)
+	glUniform1f(glGetUniformLocation(shader.getProgram(), connectField(MATERIAL, SHININESS)), 16.0f);
 
 	// Draw mesh
 	glBindVertexArray(this->VAO);
@@ -62,12 +63,17 @@ void Mesh::setupMesh() {
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->indices.size() * sizeof(GLuint), &this->indices[0], GL_STATIC_DRAW);
 
 	// Set the vertex attribute pointers
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *) offsetof(Vertex, position));
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *) offsetof(Vertex, normal));
-	glEnableVertexAttribArray(2);
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *) offsetof(Vertex, texCoords));
+	glEnableVertexAttribArray(POSITION_LOCATION);
+	glVertexAttribPointer(POSITION_LOCATION, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex),
+						  (GLvoid *) offsetof(Vertex, position));
+
+	glEnableVertexAttribArray(NORMAL_LOCATION);
+	glVertexAttribPointer(NORMAL_LOCATION, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex),
+						  (GLvoid *) offsetof(Vertex, normal));
+
+	glEnableVertexAttribArray(TEXTURE_COORDS_LOCATION);
+	glVertexAttribPointer(TEXTURE_COORDS_LOCATION, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex),
+						  (GLvoid *) offsetof(Vertex, texCoords));
 
 	glBindVertexArray(0);
 }

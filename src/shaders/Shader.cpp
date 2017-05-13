@@ -21,6 +21,9 @@ GLuint Shader::createShader(GLenum shaderType, const GLchar* shaderCode) {
 }
 
 Shader::Shader(const GLchar *vertexPath, const GLchar *fragmentPath) {
+	spotLightCount = 0;
+	pointLightCount = 0;
+
     // 1. Retrieve the vertex/fragment source code from filePath
     std::string vertexCode;
     std::string fragmentCode;
@@ -78,18 +81,40 @@ void Shader::use() {
     glUseProgram(this->program);
 }
 
+void Shader::incPointLightCount() {
+	pointLightCount++;
+}
+
+void Shader::incSpotLightCount() {
+	spotLightCount++;
+}
+
+int Shader::getPointLightCount() {
+	return pointLightCount;
+}
+
+int Shader::getSpotLightCount() {
+	return spotLightCount;
+}
+
+void Shader::cleanLightsCount() {
+	pointLightCount = 0;
+	spotLightCount = 0;
+}
+
+void Shader::applyLightsCount() {
+	glUniform1i(glGetUniformLocation(program, POINT_LIGHT_COUNT), pointLightCount);
+	glUniform1i(glGetUniformLocation(program, SPOTLIGHT_COUNT), spotLightCount);
+}
+
 std::string getShaderTypeName(GLenum shaderType) {
-    std::string name;
-
     switch (shaderType) {
-        case GL_COMPUTE_SHADER: name = "COMPUTE"; break;
-        case GL_VERTEX_SHADER: name = "VERTEX"; break;
-        case GL_TESS_CONTROL_SHADER: name = "TESS_CONTROL"; break;
-        case GL_TESS_EVALUATION_SHADER: name = "TESS_EVALUATION"; break;
-        case GL_GEOMETRY_SHADER: name = "GEOMETRY"; break;
-        case GL_FRAGMENT_SHADER: name = "FRAGMENT"; break;
-        default: name = "OTHER"; break;
+        case GL_COMPUTE_SHADER: return "COMPUTE";
+        case GL_VERTEX_SHADER: return "VERTEX";
+        case GL_TESS_CONTROL_SHADER: return "TESS_CONTROL";
+        case GL_TESS_EVALUATION_SHADER: return "TESS_EVALUATION";
+        case GL_GEOMETRY_SHADER: return "GEOMETRY";
+        case GL_FRAGMENT_SHADER: return "FRAGMENT";
+        default: return "OTHER";
     }
-
-    return name;
 }

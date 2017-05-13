@@ -10,7 +10,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "../Shader.h"
+#include "../shaders/Shader.h"
 #include "Texture.h"
 #include "Vertex.h"
 
