@@ -1,6 +1,5 @@
 #include "Camera.h"
 
-
 Camera::Camera(glm::vec3 position, glm::vec3 up, GLfloat yaw, GLfloat pitch) {
     this->position = position;
     this->worldUp = up;
@@ -62,6 +61,8 @@ void Camera::processMouseMovement(GLfloat xOffset, GLfloat yOffset, GLboolean co
     // Update Front, Right and Up Vectors using the updated Eular angles
     this->updateCameraVectors();
 }
+
+void Camera::processMouseScroll(GLfloat xOffset, GLfloat yOffset) {}
 
 GLfloat Camera::getZoom() {
     return this->zoom;
