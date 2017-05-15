@@ -24,7 +24,7 @@ public:
 	Model(const GLchar *path);
 
 	// Draws the model, and thus all its meshes
-	void Draw(Shader shader);
+	void draw(Shader shader);
 
 private:
 	std::vector<Mesh> meshes;

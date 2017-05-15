@@ -4,9 +4,9 @@ Model::Model(const GLchar *path) {
 	this->loadModel(path);
 }
 
-void Model::Draw(Shader shader) {
+void Model::draw(Shader shader) {
 	for (GLuint i = 0; i < this->meshes.size(); i++) {
-		this->meshes[i].Draw(shader);
+		this->meshes[i].draw(shader);
 	}
 }
 

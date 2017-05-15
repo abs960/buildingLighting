@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../shaders/Shader.h"
+#include "../building/Building.h"
 #include <GLFW/glfw3.h>
 
 class Scene {
@@ -16,6 +17,7 @@ public:
 protected:
 	static bool keys[1024];
 
+	Building building;
 	//TODO: add menu and building
 };
 

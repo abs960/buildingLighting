@@ -39,7 +39,7 @@ void Window::run() {
 	while (!glfwWindowShouldClose(window)) {
 		// Check and call events
 		glfwPollEvents();
-		scenes[activeSceneNum]->handleEvents();
+		activeScene->handleEvents();
 
 		// Clear the color buffer
 		glClearColor(0.0f, 0.45f, 0.00f, 1.0f);
@@ -99,7 +99,7 @@ void Window::run() {
 
 		activeScene->updateShader(&shader);
 		// Draw the loaded model
-		model3d.Draw(shader);
+		model3d.draw(shader);
 
 		shader.cleanLightsCount();
 
@@ -213,18 +213,22 @@ int Window::close() {
 
 void Window::switchActiveScene(int newActiveSceneNum) {
 	activeSceneNum = newActiveSceneNum;
-	scenes[activeSceneNum]->load();
+	activeScene->load();
 	setCallbacks();
 }
 
 void Window::setCallbacks() {
 	if (dynamic_cast<StartScene*>(scenes[activeSceneNum])) {
-
+		glfwSetKeyCallback(window, StartScene::keyCallback);
+		glfwSetCursorPosCallback(window, StartScene::mouseCallback);
+		glfwSetScrollCallback(window, StartScene::scrollCallback);
 	} else if (dynamic_cast<ViewScene*>(scenes[activeSceneNum])) {
 		glfwSetKeyCallback(window, ViewScene::keyCallback);
 		glfwSetCursorPosCallback(window, ViewScene::mouseCallback);
 		glfwSetScrollCallback(window, ViewScene::scrollCallback);
 	} else if (dynamic_cast<EditScene*>(scenes[activeSceneNum])) {
-
+		glfwSetKeyCallback(window, EditScene::keyCallback);
+		glfwSetCursorPosCallback(window, EditScene::mouseCallback);
+		glfwSetScrollCallback(window, EditScene::scrollCallback);
 	}
 }

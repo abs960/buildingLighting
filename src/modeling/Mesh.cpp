@@ -8,7 +8,7 @@ Mesh::Mesh(std::vector<Vertex> vertices, std::vector<GLuint> indices, std::vecto
 	this->setupMesh();
 }
 
-void Mesh::Draw(Shader shader) {
+void Mesh::draw(Shader shader) {
 	// Bind appropriate textures
 	GLuint diffuseNr = 1;
 	GLuint specularNr = 1;
