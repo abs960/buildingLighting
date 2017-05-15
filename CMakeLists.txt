@@ -35,6 +35,12 @@ if (ASSIMP_FOUND)
     include_directories(${ASSIMP_INCLUDE_DIRS})
 endif(ASSIMP_FOUND)
 
+# Boost search
+find_package(Boost REQUIRED)
+if (Boost_FOUND)
+	include_directories(${Boost_INCLUDE_DIRS})
+endif(Boost_FOUND)
+
 file(GLOB_RECURSE SOURCE_FILES
         src/*.cpp
         src/*.c
@@ -68,3 +74,7 @@ endif(GLFW_FOUND)
 if (ASSIMP_FOUND)
     target_link_libraries(buildingLighting ${ASSIMP_LIBRARIES})
 endif(ASSIMP_FOUND)
+
+if (Boost_FOUND)
+	target_link_libraries(buildingLighting ${Boost_LIBRARIES})
+endif(Boost_FOUND)
