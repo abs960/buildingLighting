@@ -41,7 +41,9 @@ file(GLOB_RECURSE SOURCE_FILES
         src/*.hpp
         src/*.h
         SOIL2/*.c
-        SOIL2/*.h)
+        SOIL2/*.h
+		imgui/*.cpp
+		imgui/*.h)
 
 file(GLOB_RECURSE SHADER_FILES
         resources/shaders/*.frag
