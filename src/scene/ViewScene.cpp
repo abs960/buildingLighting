@@ -59,6 +59,13 @@ void ViewScene::updateShader(Shader* shader) {
 	glUniformMatrix4fv(glGetUniformLocation(shader->getProgram(), MODEL), 1, GL_FALSE, glm::value_ptr(model));
 }
 
+void ViewScene::setCallbacks(GLFWwindow* window) {
+	glfwSetKeyCallback(window, ViewScene::keyCallback);
+	glfwSetCursorPosCallback(window, ViewScene::mouseCallback);
+	glfwSetScrollCallback(window, ViewScene::scrollCallback);
+}
+
+
 void ViewScene::keyCallback(GLFWwindow *window, int key, int scancode, int action, int mode) {
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
 		glfwSetWindowShouldClose(window, GL_TRUE);

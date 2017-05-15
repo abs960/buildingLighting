@@ -2,6 +2,7 @@
 
 #include "../Camera.h"
 #include "Scene.h"
+#include "../building/Building.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -13,6 +14,7 @@ public:
 	virtual void load();
 	virtual void handleEvents();
 	virtual void updateShader(Shader* shader);
+	virtual void setCallbacks(GLFWwindow* window);
 	static void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mode);
 	static void scrollCallback(GLFWwindow *window, double xOffset, double yOffset);
 	static void mouseCallback(GLFWwindow *window, double xPos, double yPos);
@@ -26,6 +28,7 @@ protected:
 	GLfloat lastFrame = 0.0f;
 	int windowWidth;
 	int windowHeight;
+	Building building;
 };
 
 

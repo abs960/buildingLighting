@@ -11,6 +11,7 @@ public:
 	virtual void load();
 	virtual void handleEvents();
 	virtual void updateShader(Shader* shader);
+	virtual void setCallbacks(GLFWwindow* window);
 };
 
 

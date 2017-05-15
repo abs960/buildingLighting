@@ -70,8 +70,6 @@ protected:
 
 	int init();
 	int close();
-
-	void setCallbacks();
 };
 
 

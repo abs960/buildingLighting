@@ -23,3 +23,9 @@ void StartScene::handleEvents() {
 void StartScene::updateShader(Shader *shader) {
 
 }
+
+void StartScene::setCallbacks(GLFWwindow *window) {
+	glfwSetKeyCallback(window, StartScene::keyCallback);
+	glfwSetCursorPosCallback(window, StartScene::mouseCallback);
+	glfwSetScrollCallback(window, StartScene::scrollCallback);
+}

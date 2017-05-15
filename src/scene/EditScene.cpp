@@ -16,6 +16,12 @@ void EditScene::updateShader(Shader *shader) {
 	ViewScene::updateShader(shader);
 }
 
+void EditScene::setCallbacks(GLFWwindow *window) {
+	glfwSetKeyCallback(window, EditScene::keyCallback);
+	glfwSetCursorPosCallback(window, EditScene::mouseCallback);
+	glfwSetScrollCallback(window, EditScene::scrollCallback);
+}
+
 void EditScene::keyCallback(GLFWwindow *window, int key, int scancode, int action, int mode) {
 
 }

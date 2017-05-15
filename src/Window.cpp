@@ -214,21 +214,5 @@ int Window::close() {
 void Window::switchActiveScene(int newActiveSceneNum) {
 	activeSceneNum = newActiveSceneNum;
 	activeScene->load();
-	setCallbacks();
-}
-
-void Window::setCallbacks() {
-	if (dynamic_cast<StartScene*>(scenes[activeSceneNum])) {
-		glfwSetKeyCallback(window, StartScene::keyCallback);
-		glfwSetCursorPosCallback(window, StartScene::mouseCallback);
-		glfwSetScrollCallback(window, StartScene::scrollCallback);
-	} else if (dynamic_cast<ViewScene*>(scenes[activeSceneNum])) {
-		glfwSetKeyCallback(window, ViewScene::keyCallback);
-		glfwSetCursorPosCallback(window, ViewScene::mouseCallback);
-		glfwSetScrollCallback(window, ViewScene::scrollCallback);
-	} else if (dynamic_cast<EditScene*>(scenes[activeSceneNum])) {
-		glfwSetKeyCallback(window, EditScene::keyCallback);
-		glfwSetCursorPosCallback(window, EditScene::mouseCallback);
-		glfwSetScrollCallback(window, EditScene::scrollCallback);
-	}
+	activeScene->setCallbacks(window);
 }

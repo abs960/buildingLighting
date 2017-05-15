@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../shaders/Shader.h"
-#include "../building/Building.h"
+#include "../menu/Menu.h"
 #include <GLFW/glfw3.h>
 
 class Scene {
@@ -13,12 +13,11 @@ public:
 	virtual void load() = 0;
 	virtual void handleEvents() = 0;
 	virtual void updateShader(Shader* shader) = 0;
-
+	virtual void setCallbacks(GLFWwindow* window) = 0;
 protected:
 	static bool keys[1024];
 
-	Building building;
-	//TODO: add menu and building
+	Menu* menu;
 };
 
 
